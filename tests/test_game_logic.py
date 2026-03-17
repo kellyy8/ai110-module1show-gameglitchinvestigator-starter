@@ -14,3 +14,9 @@ def test_guess_too_low():
     # If secret is 50 and guess is 40, hint should be "Too Low"
     result = check_guess(40, 50)
     assert result == "Too Low"
+
+def test_check_guess_regression_high_low_not_inverted():
+    # Regression guard: this used to incorrectly report "Too Low".
+    result = check_guess(51, 50)
+    assert result == "Too High"
+    assert result != "Too Low"
