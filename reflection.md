@@ -8,6 +8,13 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
+| Bug | Expected Behavior |
+|-----|-------------------|
+| Instructions say: "Guess a number between 1 and 100," but I am able to enter numbers that are less than 1 or greater than 100. | The application should prevent me from entering numbers that are out of bounds. |
+| Invalid inputs are counted as attempts. If I enter a number that is out of bounds or a non-numerical input, I get a hint that warns me but my attempt is also counted. | The application should show the warning, but not consider my input as an attempt. |
+| If I repeatedly enter non-numerical inputs, I reach a negative number of attempts left. | The smallest number of attempts left should be 0. If we run out of attempts before guessing the number, the game should end. |
+| If I submit `1000` twice, I get one hint that says to go LOWER and then another hint that says to go HIGHER. | Same inputs should receive same hints. Each input should only have one deterministic hint. |
+
 ---
 
 ## 2. How did you use AI as a teammate?
