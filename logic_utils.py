@@ -3,13 +3,28 @@ def get_range_for_difficulty(difficulty: str):
     raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
 
 
-def parse_guess(raw: str):
+def parse_guess(raw: str, low: int | None = None, high: int | None = None):
     """
-    Parse user input into an int guess.
+    Parse user input into an int guess and optionally validate bounds.
 
     Returns: (ok: bool, guess_int: int | None, error_message: str | None)
     """
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if raw is None:
+        return False, None, "Enter a guess."
+
+    cleaned = str(raw).strip()
+    if cleaned == "":
+        return False, None, "Enter a guess."
+
+    try:
+        value = int(cleaned)
+    except (TypeError, ValueError):
+        return False, None, "That is not a number."
+
+    if low is not None and high is not None and not (low <= value <= high):
+        return False, None, f"Guess must be between {low} and {high}."
+
+    return True, value, None
 
 
 def check_guess(guess, secret):

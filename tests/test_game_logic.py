@@ -1,4 +1,8 @@
-from logic_utils import check_guess
+from logic_utils import check_guess, parse_guess
+
+# ================================================================
+# Test check_guess() logic
+# ================================================================
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
@@ -20,3 +24,25 @@ def test_check_guess_regression_high_low_not_inverted():
     result = check_guess(51, 50)
     assert result == "Too High"
     assert result != "Too Low"
+
+# ================================================================
+# Test parse_guess() logic 
+# ================================================================
+
+def test_parse_guess_non_numeric_input():
+    ok, value, err = parse_guess("abc", 1, 100)
+    assert ok is False
+    assert value is None
+    assert err == "That is not a number."
+
+def test_parse_guess_out_of_bounds_input():
+    ok, value, err = parse_guess("101", 1, 100)
+    assert ok is False
+    assert value is None
+    assert err == "Guess must be between 1 and 100."
+
+def test_parse_guess_out_of_bounds_input():
+    ok, value, err = parse_guess("0", 1, 100)
+    assert ok is False
+    assert value is None
+    assert err == "Guess must be between 1 and 100."
