@@ -20,17 +20,34 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+  - I used Copilot.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+  - AI suggested that to parse the guess, we need to check that the guess is non-empty, that the guess contains valid characters that can
+    be converted into an integer, and that the integer was within the specified bounds.
+    This is correct because a non-empty input means a guess does not exist. If the guess cannot be converted into an integer, then we cannot
+    compare the guess against the bounds nor the secret (correct answer), which is an integer.
+    I verified the result by manually playing the game and entering different inputs that would go through each of the control flows.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
-
+  - AI suggested 2 pytest cases that tested for non-numerical inputs and an input that was greater than the upper bound.
+  - While these pytest cases are good, AI did not account for other valid and invalid inputs.
+    Another invalid input would be an input that is less than the lower bound.
+    Valid inputs include inputs that are exactly at the lower and upper bounds and inputs that are within bounds.
+    Without these additional exhaustive test cases, our code is not 100% resilient against all inputs.
+    I verified that the test cases were missing and necessary by reviewing the changes to the test_game_logic.py file,
+    prompting AI to add the missing test cases, running the test cases via my command line, and manually playing the game to ensure the game works.
 ---
 
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
+  - Ensuring that there was a test case for each scenario and that each test case tested for all the control flows in the fixed implementation.
+- Describe at least one test you ran (manual or using pytest) and what it showed you about your code.
+  - The test case `test_parse_guess_out_of_bounds_input_upper` that I ran using pytest showed that my code catches when the input is
+    greater than the upper bound.
 - Did AI help you design or understand any tests? How?
+  - Yes. AI helped suggest test cases like `test_parse_guess_non_numeric_input` and `test_parse_guess_out_of_bounds_input_upper`. Based on
+    these test cases I prompted AI to create more test cases to make the test set exhaustive. For instance, I asked AI to write a test case
+    that would test if the input would be less than the lower bound, at the lower bound, at the upper bound, or within the bounds.
 
 ---
 
