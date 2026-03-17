@@ -111,7 +111,7 @@ if st.session_state.status != "playing":
 if submit:
     st.session_state.attempts += 1
 
-    #FIX: Refactored parse_guess logic into logic_utils.py using Copilot Agent mode
+    #FIX: Refactored parse_guess logic into logic_utils.py using Copilot Agent mode (now checks input against bounds)
     ok, guess_int, err = parse_guess(raw_guess, low, high)
 
     if not ok:
@@ -125,7 +125,7 @@ if submit:
         else:
             secret = st.session_state.secret
 
-        #FIX: Refactored check_guess logic into logic_utils.py using Copilot Agent mode
+        #FIX: Refactored check_guess logic into logic_utils.py using Copilot Agent mode (hint is deterministic now)
         outcome = check_guess(guess_int, secret)
         hint_messages = {
             "Win": "🎉 Correct!",

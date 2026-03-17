@@ -3,7 +3,7 @@ def get_range_for_difficulty(difficulty: str):
     raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
 
 
-#FIX: Refactored parse_guess logic into logic_utils.py using Copilot Agent mode
+#FIX: Refactored parse_guess logic into logic_utils.py using Copilot Agent mode (now checks input against bounds)
 def parse_guess(raw: str, low: int | None = None, high: int | None = None):
     """
     Parse user input into an int guess and optionally validate bounds.
@@ -28,7 +28,7 @@ def parse_guess(raw: str, low: int | None = None, high: int | None = None):
     return True, value, None
 
 
-#FIX: Refactored check_guess logic into logic_utils.py using Copilot Agent mode
+#FIX: Refactored check_guess logic into logic_utils.py using Copilot Agent mode (hint is deterministic now)
 def check_guess(guess, secret):
     """
     Compare guess to secret and return outcome.
